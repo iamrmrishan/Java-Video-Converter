@@ -1,13 +1,13 @@
 package convert;
 
-import com.sun.org.apache.bcel.internal.Repository;
+//import com.sun.org.apache.bcel.internal.Repository;
 import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
 import it.sauronsoftware.jave.VideoAttributes;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.io.File;
 
 public class Convert {
