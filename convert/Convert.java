@@ -62,13 +62,13 @@ public class Convert {
         specificationsForMkv.setFormat("matroska");
         AudioAttributes audioForMkv = new AudioAttributes();
         audioForMkv.setCodec("libmp3lame");
-        audioForMkv.setBitRate(new Integer(30000));
+        audioForMkv.setBitRate(new Integer(64000));
         audioForMkv.setChannels(new Integer(1));
-        audioForMkv.setSamplingRate(new Integer(11050));
+        audioForMkv.setSamplingRate(new Integer(22050));
         VideoAttributes videoForMkv = new VideoAttributes();
-        videoForMkv.setCodec("h263");
-        videoForMkv.setBitRate(new Integer(100000));
-        videoForMkv.setFrameRate(new Integer(20));
+        videoForMkv.setCodec("mpeg4");
+        videoForMkv.setBitRate(new Integer(160000));
+        videoForMkv.setFrameRate(new Integer(15));
         specificationsForMkv.setAudioAttributes(audioForMkv);
         specificationsForMkv.setVideoAttributes(videoForMkv);
 
