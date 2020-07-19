@@ -33,7 +33,7 @@ public class Convert {
 
         // delete the original file
         file.delete();
-        System.out.println("Deleted file" + file.getName());
+        System.out.println("Deleted file " + file.getName());
       }
     } catch (Exception ex) {
       ex.printStackTrace();
