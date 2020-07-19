@@ -11,13 +11,14 @@ public class flvThread implements Runnable {
 
   Thread t = new Thread(this);
 
-  private static String flvPath = convert.config.getMp4ToFlvPath();
+  private static String flvPath = config.getMp4ToFlvPath();
+  private static String flvConvertPath = config.getMp4ToFlvConvertPath();
   private static Path mp4ToflvPath = FileSystems.getDefault().getPath(flvPath);
 
   @Override
   public void run() {
     try {
-      main.mp4Toflv();
+      Convert.assignPath(flvPath, flvConvertPath, ".flv");
 
       WatchService watchServiceMp4ToFlv = mp4ToflvPath.getFileSystem().newWatchService();
       mp4ToflvPath.register(watchServiceMp4ToFlv, StandardWatchEventKinds.ENTRY_CREATE,
@@ -29,7 +30,7 @@ public class flvThread implements Runnable {
 
         // poll for file system events on the WatchKey
         for (final WatchEvent<?> event : watchKeyMp4ToFlv.pollEvents()) {
-          main.mp4Toflv();
+          Convert.assignPath(flvPath, flvConvertPath, ".flv");
         }
         // Break out of the loop if watch directory got deleted
         if (!watchKeyMp4ToFlv.reset()) {

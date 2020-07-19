@@ -1,82 +1,42 @@
 package convert;
 
-//import com.sun.org.apache.bcel.internal.Repository;
-import it.sauronsoftware.jave.AudioAttributes;
-import it.sauronsoftware.jave.Encoder;
-import it.sauronsoftware.jave.EncoderException;
-import it.sauronsoftware.jave.EncodingAttributes;
-import it.sauronsoftware.jave.VideoAttributes;
-
-//import java.util.Scanner;
 import java.io.File;
 
 public class Convert {
 
-    // convert mp4 to flv
-    public static void convertMp4ToFlv(File source, File output) {
-        Encoder forFlv = new Encoder();
+  public static void assignPath(String mediaPath, String convertMediaPath, String extension) {
+    try {
+      File[] files = new File(mediaPath).listFiles();
 
-        EncodingAttributes specificationsForFlv = new EncodingAttributes();
-        specificationsForFlv.setFormat("flv");
-        AudioAttributes audioForFlv = new AudioAttributes();
-        audioForFlv.setCodec("libmp3lame");
-        audioForFlv.setBitRate(new Integer(64000));
-        audioForFlv.setChannels(new Integer(1));
-        audioForFlv.setSamplingRate(new Integer(22050));
-        VideoAttributes videoForFlv = new VideoAttributes();
-        videoForFlv.setCodec("flv");
-        videoForFlv.setBitRate(new Integer(160000));
-        videoForFlv.setFrameRate(new Integer(15));
-        specificationsForFlv.setAudioAttributes(audioForFlv);
-        specificationsForFlv.setVideoAttributes(videoForFlv);
+      File destination = new File(convertMediaPath);
 
-        try {
-            forFlv.encode(source, output, specificationsForFlv);
-        } catch (EncoderException ex) {
-            ex.printStackTrace();
+      for (File file : files) {
+        String[] nameFile = file.getAbsolutePath().split("\\\\");
+        String[] removeExtension = nameFile[nameFile.length - 1].split("\\.");
+
+        File target = new File(destination.getAbsolutePath() + "\\" + removeExtension[0] + extension);
+
+        switch (extension) {
+          case ".mp3":
+            mp4tomp3.convertMp4ToMp3(file, target);
+            break;
+          case ".mkv":
+            mp4tomkv.convertMp4ToMkv(file, target);
+            break;
+          case ".flv":
+            mp4toflv.convertMp4ToFlv(file, target);
+            break;
+          default:
+            break;
         }
+        System.out.println("Successfully Converted " + file.getName() + " to " + target.getName());
+
+        // delete the original file
+        file.delete();
+        System.out.println("Deleted file" + file.getName());
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
-
-    // convert mp4 to mp3
-    public static void convertMp4ToMp3(File source, File output) {
-        Encoder forMp3 = new Encoder();
-        EncodingAttributes specificationsForMp3 = new EncodingAttributes();
-        specificationsForMp3.setFormat("mp3");
-        AudioAttributes audioForMp3 = new AudioAttributes();
-        audioForMp3.setVolume(256);
-        audioForMp3.setCodec("mp2");
-        specificationsForMp3.setAudioAttributes(audioForMp3);
-
-        try {
-            forMp3.encode(source, output, specificationsForMp3);
-        } catch (EncoderException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    // convert mp4 to mkv
-    public static void convertMp4ToMkv(File source, File output) {
-        Encoder forMkv = new Encoder();
-
-        EncodingAttributes specificationsForMkv = new EncodingAttributes();
-        specificationsForMkv.setFormat("matroska");
-        AudioAttributes audioForMkv = new AudioAttributes();
-        audioForMkv.setCodec("libmp3lame");
-        audioForMkv.setBitRate(new Integer(64000));
-        audioForMkv.setChannels(new Integer(1));
-        audioForMkv.setSamplingRate(new Integer(22050));
-        VideoAttributes videoForMkv = new VideoAttributes();
-        videoForMkv.setCodec("mpeg4");
-        videoForMkv.setBitRate(new Integer(160000));
-        videoForMkv.setFrameRate(new Integer(15));
-        specificationsForMkv.setAudioAttributes(audioForMkv);
-        specificationsForMkv.setVideoAttributes(videoForMkv);
-
-        try {
-            forMkv.encode(source, output, specificationsForMkv);
-        } catch (EncoderException ex) {
-            ex.printStackTrace();
-        }
-    }
-
+  }
 }

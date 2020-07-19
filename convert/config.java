@@ -1,12 +1,12 @@
 package convert;
 
 public class config {
-  private static String mp4Tomp3Path = "C:\\Users\\Ishara\\Desktop\\Java-Video-Converter\\media\\mp4Tomp3";
-  private static String mp4TomkvPath = "C:\\Users\\Ishara\\Desktop\\Java-Video-Converter\\media\\mp4Tomkv";
-  private static String mp4ToflvPath = "C:\\Users\\Ishara\\Desktop\\Java-Video-Converter\\media\\mp4Toflv";
-  private static String mp4Tomp3ConvertedPath = "C:\\Users\\Ishara\\Desktop\\Java-Video-Converter\\media-converted\\mp4Tomp3-converted";
-  private static String mp4TomkvConvertedPath = "C:\\Users\\Ishara\\Desktop\\Java-Video-Converter\\media-converted\\mp4Tomkv-converted";
-  private static String mp4ToflvConvertedPath = "C:\\Users\\Ishara\\Desktop\\Java-Video-Converter\\media-converted\\mp4Toflv-converted";
+  private static String mp4Tomp3Path = "E:\\Third Year\\First semester\\Integrative Programming\\Ass-02\\Java-Video-Converter-master\\Java-Video-Converter-master\\media\\mp4Tomp3";
+  private static String mp4TomkvPath = "E:\\Third Year\\First semester\\Integrative Programming\\Ass-02\\Java-Video-Converter-master\\Java-Video-Converter-master\\media\\mp4Tomkv";
+  private static String mp4ToflvPath = "E:\\Third Year\\First semester\\Integrative Programming\\Ass-02\\Java-Video-Converter-master\\Java-Video-Converter-master\\media\\mp4Toflv";
+  private static String mp4Tomp3ConvertedPath = "E:\\Third Year\\First semester\\Integrative Programming\\Ass-02\\Java-Video-Converter-master\\Java-Video-Converter-master\\media-converted\\mp4Tomp3-converted";
+  private static String mp4TomkvConvertedPath = "E:\\Third Year\\First semester\\Integrative Programming\\Ass-02\\Java-Video-Converter-master\\Java-Video-Converter-master\\media-converted\\mp4Tomkv-converted";
+  private static String mp4ToflvConvertedPath = "E:\\Third Year\\First semester\\Integrative Programming\\Ass-02\\Java-Video-Converter-master\\Java-Video-Converter-master\\media-converted\\mp4Toflv-converted";
 
   public static String getMp4ToMp3Path() {
     return mp4Tomp3Path;

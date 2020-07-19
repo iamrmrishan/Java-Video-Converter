@@ -11,13 +11,14 @@ public class mkvThread implements Runnable {
 
   Thread t = new Thread(this);
 
-  private static String mkvPath = convert.config.getMp4ToMkvPath();
+  private static String mkvPath = config.getMp4ToMkvPath();
+  private static String mkvConvertPath = config.getMp4ToMkvConvertPath();
   private static Path mp4TomkvPath = FileSystems.getDefault().getPath(mkvPath);
 
   @Override
   public void run() {
     try {
-      main.mp4Tomkv();
+      Convert.assignPath(mkvPath, mkvConvertPath, ".mkv");
 
       WatchService watchServiceMp4ToMkv = mp4TomkvPath.getFileSystem().newWatchService();
       mp4TomkvPath.register(watchServiceMp4ToMkv, StandardWatchEventKinds.ENTRY_CREATE);
@@ -28,7 +29,7 @@ public class mkvThread implements Runnable {
 
         // poll for file system events on the WatchKey
         for (final WatchEvent<?> event : watchKeyMp4ToMkv.pollEvents()) {
-          main.mp4Tomkv();
+          Convert.assignPath(mkvPath, mkvConvertPath, ".mkv");
         }
         // Break out of the loop if watch directory got deleted
         if (!watchKeyMp4ToMkv.reset()) {

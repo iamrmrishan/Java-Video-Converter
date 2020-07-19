@@ -11,13 +11,14 @@ public class mp3Thread implements Runnable {
 
   Thread t = new Thread(this);
 
-  private static String mp3Path = convert.config.getMp4ToMp3Path();
+  private static String mp3Path = config.getMp4ToMp3Path();
+  private static String mp3ConvertPath = config.getMp4ToMp3ConvertPath();
   private static Path mp4Tomp3Path = FileSystems.getDefault().getPath(mp3Path);
 
   @Override
   public void run() {
     try {
-      main.mp4Tomp3();
+      Convert.assignPath(mp3Path, mp3ConvertPath, ".mp3");
 
       WatchService watchServiceMp4ToMp3 = mp4Tomp3Path.getFileSystem().newWatchService();
       mp4Tomp3Path.register(watchServiceMp4ToMp3, StandardWatchEventKinds.ENTRY_CREATE);
@@ -28,7 +29,7 @@ public class mp3Thread implements Runnable {
 
         // poll for file system events on the WatchKey
         for (final WatchEvent<?> event : watchKeyMp4ToMp3.pollEvents()) {
-          main.mp4Tomp3();
+          Convert.assignPath(mp3Path, mp3ConvertPath, ".mp3");
         }
         // Break out of the loop if watch directory got deleted
         if (!watchKeyMp4ToMp3.reset()) {
